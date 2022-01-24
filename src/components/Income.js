@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import '../App.css';
-import { collection, getDocs } from "firebase/firestore";
-import {Table} from 'react-bootstrap';
+//import { collection, getDocs } from "firebase/firestore";
+//import {Table} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from '@restart/ui/esm/Button';
 import {FormLabel}  from 'react-bootstrap';
@@ -9,8 +9,8 @@ import {FormControl}  from 'react-bootstrap';
 import { FormGroup } from 'react-bootstrap';
 import {db} from '../firebase';
 import { doc, setDoc } from "firebase/firestore";
-import {Link, useNavigate} from "react-router-dom";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import {useNavigate} from "react-router-dom";
+import { getAuth, onAuthStateChanged} from "firebase/auth";
 
 
 
@@ -21,7 +21,7 @@ function Income(){
     const srcIncome=useRef();
     const amount=useRef();
     const incomeFrom=useRef();
-    let navigate=useNavigate();
+   let navigate=useNavigate();
 
 
     const auth = getAuth();
@@ -30,7 +30,7 @@ function Income(){
             // User is signed in, see docs for a list of available properties
             // https://firebase.google.com/docs/reference/js/firebase.User
             console.log("User is signed in")
-            const uid = user.uid;
+            //const uid = user.uid;
             // ...
         } else {
             // User is signed out

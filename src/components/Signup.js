@@ -12,6 +12,7 @@ import Button from '@restart/ui/esm/Button';
 import {Link, useNavigate} from "react-router-dom";
 
 
+
   
 
   function Signup(){
@@ -20,8 +21,6 @@ import {Link, useNavigate} from "react-router-dom";
     const firstnameRef=useRef();
     const secondnameRef=useRef()
     let navigate=useNavigate();
-
-
 
 
     function SignupUser(){
@@ -43,6 +42,13 @@ import {Link, useNavigate} from "react-router-dom";
         })
          
         // ...
+
+              // Add a new document in collection "cities"
+       setDoc(doc(db, "users", user.uid), {
+        firstnameRef: firstnameRef.current.value,
+        secondnameRef: secondnameRef.current.value
+      });
+
       })
       .catch((error) => {
         // const errorCode = error.code;
