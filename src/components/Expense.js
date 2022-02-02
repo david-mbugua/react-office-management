@@ -38,7 +38,7 @@ function Expense(){
         });
 
     function addExpense(){
-        setDoc(doc(db, "expense", "hello"), {
+        setDoc(doc(db, "expense", "hello3"), {
             spentOn: spentOn.current.value,
             amount: amount.current.value,
             authorisedBy: authorisedBy.current.value

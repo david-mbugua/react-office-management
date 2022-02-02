@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Table} from 'react-bootstrap';
@@ -9,44 +9,38 @@ import {db} from '../firebase';
 
 function ExpenseList(){
 
-    getDocs(collection(db, "Expense")).then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-        });
-    });  
+    const[expense, setExpense]=useState([])
+    
 
+    useEffect(() => {
+        getDocs(collection(db, "expense")).then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                setExpense([...expense, doc.data()])
+            });
+        });
+    },[])
     return(
         <div className='dash'>
                         <Table striped bordered hover>
-            <thead>
+                        <thead key="u">
                 <tr>
-                <th>#</th>
-                <th>Item</th>
-                <th>Item Code</th>
-                <th>Item Description</th>
-                <th>Quantity</th>
+                <th>Expense amoount</th>
+                <th>Authorised by</th>
+                <th>Spent on</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                </tr>
-                <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                </tr>
-                <tr>
-                <td>3</td>
-                <td>Larry the Bird</td>
-                <td>@twitter</td>
-                <td></td>
-                </tr>
+            <tbody key="v">
+            {expense && expense.map(theExpense=>{
+                 return(
+                    <tr key= {Math.random()} className='inc'>
+                        <td>{theExpense.amount}</td>
+                        <td>{theExpense.authorisedBy}</td>
+                        <td>{theExpense.spentOn}</td>
+                    </tr>
+                )
+            })}
             </tbody>
             </Table>
         </div>
