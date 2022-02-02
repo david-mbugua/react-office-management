@@ -39,7 +39,7 @@
 
 .listItem{
   list-style-type: none;
-  margin-top: 40px;
+  margin-top: 20px;
   font-size: 21px;
   text-decoration: none;
 }
@@ -65,13 +65,19 @@
 .menuItem{
   text-decoration: none;
   color: white;
+  font-size: 19px;
+}
+
+.inc{
+  color: black;
 }
 
 .mainForm{
   position: relative;
   left: 620px;
-  top: -450px;
+  top: -600px;
   color: black;
+  font-size: 13px;
 }
 .regLink{
   color: rgb(0, 0, 255);

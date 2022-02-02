@@ -1,9 +1,10 @@
 import React from 'react';
 import '../App.css';
-import imgprofile from '../IMAGES/imgone.jpg'
+//import imgprofile from '../IMAGES/imgone.jpg'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { collection, getDocs } from "firebase/firestore";
 import {db} from '../firebase';
+import { collection, query, where, getDocs } from "firebase/firestore";
+
 
 
 
@@ -15,10 +16,22 @@ onAuthStateChanged(auth, (user) => {
     // https://firebase.google.com/docs/reference/js/firebase.User
     const uid = user.uid;
     console.log(uid)
-   getDocs(collection(db, "users")).where("firstnameRef", "==", "stan").then((querySnapshot) => {
+    const q = query(collection(db, "users"), where("userId", "==", uid));
+
+   getDocs(q).then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
+            const userName = doc.data().firstnameRef;
+            const userNames = doc.data().secondnameRef;
+            const email = doc.data().emailRef;
+            const jobID = doc.data().idRef;
+            const dept = doc.data().depRef;
+            console.log(userName)
+            document.getElementById("userName").innerText = userName;
+            document.getElementById("email").innerText = email;
+            document.getElementById("jobID").innerText = jobID;
+            document.getElementById("dept").innerText = dept;
         });
     });
   } else {
@@ -28,14 +41,11 @@ onAuthStateChanged(auth, (user) => {
 });
     return(
         <div className="dasha">
-            <img className='profimg' src={imgprofile} />
-            <p>Name</p>
-            <p>Email</p>
-            <p>User ID</p>
-            <p>Department</p>
-            <p>Country of origin</p>
-            <p>Home address</p>
-            <p>LinkedIn</p>
+            {/* <img className='profimg' src={imgprofile} /> */}
+            <p id='userName'>Name</p>
+            <p id='email'>Email</p>
+            <p id='jobID'>Job ID</p>
+            <p id='dept'>Department</p>
         </div>
     )
 }

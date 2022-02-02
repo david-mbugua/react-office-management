@@ -9,7 +9,7 @@ import {db} from '../firebase';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import Button from '@restart/ui/esm/Button';
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -19,8 +19,12 @@ import {Link, useNavigate} from "react-router-dom";
     const emailRef=useRef();
     const passwordRef=useRef();
     const firstnameRef=useRef();
-    const secondnameRef=useRef()
-    let navigate=useNavigate();
+    const secondnameRef=useRef();
+    const idRef=useRef();
+    const depRef=useRef();
+
+
+   let navigate=useNavigate();
 
 
     function SignupUser(){
@@ -36,7 +40,11 @@ import {Link, useNavigate} from "react-router-dom";
 
          setDoc(doc(db, "users", user.uid ), {
           firstnameRef: firstnameRef.current.value,
-          secondnameRef: secondnameRef.current.value
+          secondnameRef: secondnameRef.current.value,
+          emailRef: emailRef.current.value,
+          depRef: depRef.current.value,
+          idRef: idRef.current.value,
+          userId: user.uid
         }).then(()=>{
           navigate("/")
         })
@@ -44,10 +52,10 @@ import {Link, useNavigate} from "react-router-dom";
         // ...
 
               // Add a new document in collection "cities"
-       setDoc(doc(db, "users", user.uid), {
-        firstnameRef: firstnameRef.current.value,
-        secondnameRef: secondnameRef.current.value
-      });
+      //  setDoc(doc(db, "users", user.uid), {
+      //   firstnameRef: firstnameRef.current.value,
+      //   secondnameRef: secondnameRef.current.value
+      // });
 
       })
       .catch((error) => {
@@ -77,6 +85,16 @@ import {Link, useNavigate} from "react-router-dom";
         <FormGroup className="mb-3" controlId="formBasicEmail">
           <FormLabel>Email Address</FormLabel>
           <FormControl ref={emailRef} type="email" placeholder="Enter email" />
+        </FormGroup>
+
+        <FormGroup className="mb-3" controlId="formBasicEmail">
+          <FormLabel>Job ID</FormLabel>
+          <FormControl ref={idRef} type="text" placeholder="Enter Job ID" />
+        </FormGroup>
+
+        <FormGroup className="mb-3" controlId="formBasicEmail">
+          <FormLabel>Department</FormLabel>
+          <FormControl ref={depRef} type="text" placeholder="Enter Department" />
         </FormGroup>
   
         <FormGroup className="mb-3" controlId="formBasicPassword">

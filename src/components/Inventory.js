@@ -1,6 +1,5 @@
 import React from 'react';
 import '../App.css'
-import {Modal} from '../components/Modal'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Table} from 'react-bootstrap';
 
@@ -16,12 +15,13 @@ function Inventory(){
     const testt=()=>{
         
     }
+
+    
     return(
         <div className="dash">
             <h1>Inventory</h1>
             <button onClick={hello}>Add Inventory</button>
             <button onclick={testt}>Test button</button>
-            <Modal></Modal>
             
             
             <Table striped bordered hover>
