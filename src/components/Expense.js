@@ -38,7 +38,15 @@ function Expense(){
         });
 
     function addExpense(){
-        setDoc(doc(db, "expense", "hello3"), {
+
+      const theID=Math.random();
+      const addAmt = theID * 1000000;
+      const exp =Math.round(addAmt);
+      const amtExp = exp + "ABCD"
+
+      console.log(amtExp);
+
+        setDoc(doc(db, "expense", amtExp), {
             spentOn: spentOn.current.value,
             amount: amount.current.value,
             authorisedBy: authorisedBy.current.value

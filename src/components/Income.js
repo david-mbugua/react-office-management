@@ -39,15 +39,24 @@ function Income(){
             navigate("/login")
         }
         });
-
+    
+        
     function addIncome(){
-        setDoc(doc(db, "income", "hello"), {
+      const theID=Math.random();
+      const addAmt = theID * 1000000;
+      const Amt =Math.round(addAmt);
+      const amtStr = Amt + "ABCD"
+
+      console.log(amtStr);
+
+        setDoc(doc(db, "income", amtStr), {
             srcIncome: srcIncome.current.value,
             amount: amount.current.value,
             incomeFrom: incomeFrom.current.value
           });
     }
     return(
+      
         <div className="dash">
             <div className="headerContainer">
             <h1>Income</h1>
@@ -72,6 +81,9 @@ function Income(){
         </FormGroup>
 
         <button onClick={addIncome} className="btn btn-primary">submit</button>
+        
+        
+    
         </div>
             
         </div>
